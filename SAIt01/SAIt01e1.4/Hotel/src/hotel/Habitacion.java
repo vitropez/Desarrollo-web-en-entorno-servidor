@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 abstract class Habitacion {
 	protected String clase;
-	protected int precio;
+	protected  int precio;
 	protected String libreOcupada;
 	protected long tiempo;
 
@@ -53,39 +53,53 @@ abstract class Habitacion {
 	public void setClase(String clase) {
 		this.clase = clase;
 	}
-	static public String checkin(Habitacion miHabitacion) {
+	static public void checkin(Habitacion miHabitacion) {
 		System.out.println(miHabitacion);
-		
+		System.out.println(miHabitacion.getClase());
+		System.out.println(miHabitacion.getPrecio());
+		if(miHabitacion.getLibreOcupada().equals("libre")) {
 			miHabitacion.setLibreOcupada("ocupada");
-			Date fecha = new Date(1599567400L);
+			Date fecha = new Date(1490161712000L);
 			long dias = fecha.getTime();
 			miHabitacion.setTiempo(dias);
 		    DateFormat simple = new SimpleDateFormat("dd MMM yyyy ");
 			System.out.println(simple.format(fecha.getTime()));
-	
-		return "HABITACION OCUPADA";
+		}
+		else {
+			System.out.println("la habitacion está ocupada");
+		}
+		
 	}
-	static public String checkout(Habitacion miHabitacion) {
+	static public void checkout(Habitacion miHabitacion) {
 		System.out.println(miHabitacion);
+		System.out.println(miHabitacion.getPrecio());
+		if(miHabitacion.getLibreOcupada().equals("ocupada")) {
 			long fechaDeRegistro=miHabitacion.getTiempo();
-			System.out.println(fechaDeRegistro);
+			
 			miHabitacion.setLibreOcupada("libre");
 			Date fecha = new Date();
 			long dias = fecha.getTime();
-			System.out.println(dias);
+			
 			long tiempoDeEstancia=dias-fechaDeRegistro;
 			
 			int estancia = (int) (tiempoDeEstancia /  (1000*60*60*24));
-			System.out.println(estancia);
+			
+			int tarifa=estancia*(miHabitacion.getPrecio());
+			System.out.println(tarifa);
+			
 			miHabitacion.setTiempo(0);
-		   
-		return "HABITACION OCUPADA";
+			System.out.println("la factura es: "+tarifa+" euros");
+		}
+		else {
+			System.out.println("la habitación no está ocupada");
+		}
+		
 	}
 
 
 	@Override
 	public String toString() {
-		return "Habitacion clase=" + clase + ", precio=" + precio + ", libreOcupada=" + libreOcupada + ", tiempo="
+		return "Habitacion clase:" + clase + ", precio:" + precio + ", libreOcupada:" + libreOcupada + ", tiempo="
 				+ tiempo + " ";
 	}
 

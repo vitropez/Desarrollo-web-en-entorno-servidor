@@ -6,10 +6,7 @@ public class Lowcost extends Habitacion {
 	private long timepo;
 	private String clase;
 
-	public Lowcost() {
-		
-
-	}
+	
 
 	public Lowcost(String clase, int precio, String libreOcupada, long tiempo) {
 		super(clase, precio, libreOcupada, tiempo);

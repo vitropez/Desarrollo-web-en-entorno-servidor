@@ -6,10 +6,7 @@ public class Dobles extends Habitacion {
 	private long timepo;
 	private String clase;
 
-	public Dobles() {
-		super();
-
-	}
+	
 
 	public Dobles(String clase, int precio, String libreOcupada, int tiempo) {
 		super(clase, precio, libreOcupada, tiempo);

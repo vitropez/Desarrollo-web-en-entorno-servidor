@@ -7,10 +7,7 @@ public class Suite extends Habitacion {
 	private long timepo;
 	private String clase;
 
-	public Suite() {
-		super();
-
-	}
+	
 
 	public Suite(String clase, int precio, String libreOcupada, long tiempo) {
 		super(clase, precio, libreOcupada, tiempo);
