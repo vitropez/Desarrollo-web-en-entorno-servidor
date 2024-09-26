@@ -1,15 +1,17 @@
 package hotel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Lowcost extends Habitacion {
 	private static int numeroDePlazas = 3;
-	private int precio;
-	private long timepo;
-	private String clase;
-
-	
 
 	public Lowcost(String clase, int precio, String libreOcupada, long tiempo) {
-		super(clase, precio, libreOcupada, tiempo);
+		this.clase = clase;
+		this.precio = precio;
+		this.libreOcupada = libreOcupada;
+		this.tiempo = tiempo;
 
 	}
 
@@ -17,28 +19,45 @@ public class Lowcost extends Habitacion {
 		return numeroDePlazas;
 	}
 
-	public int getPrecio() {
-		return precio;
+	@Override
+	public void checkin(Habitacion miHabitacion) {
+
+		if (miHabitacion.getLibreOcupada().equals("libre")) {
+			miHabitacion.setLibreOcupada("ocupada");
+			Date fecha = new Date(1490161712000L);
+			long dias = fecha.getTime();
+			miHabitacion.setTiempo(dias);
+			DateFormat simple = new SimpleDateFormat("dd MMM yyyy ");
+			System.out.println(simple.format(fecha.getTime()));
+		} else {
+			System.out.println("la habitacion está ocupada");
+		}
+
 	}
 
-	public void setPrecio(int precio) {
-		this.precio = precio;
-	}
+	@Override
+	public void checkout(Habitacion miHabitacion) {
+		System.out.println(miHabitacion);
+		System.out.println(miHabitacion.getPrecio());
+		if (miHabitacion.getLibreOcupada().equals("ocupada")) {
+			long fechaDeRegistro = miHabitacion.getTiempo();
 
-	public long getTimepo() {
-		return timepo;
-	}
+			miHabitacion.setLibreOcupada("libre");
+			Date fecha = new Date();
+			long dias = fecha.getTime();
 
-	public void setTimepo(long timepo) {
-		this.timepo = timepo;
-	}
+			long tiempoDeEstancia = dias - fechaDeRegistro;
 
-	public String getClase() {
-		return clase;
-	}
+			int estancia = (int) (tiempoDeEstancia / (1000 * 60 * 60 * 24));
 
-	public void setClase(String clase) {
-		this.clase = clase;
-	}
+			int tarifa = estancia * (miHabitacion.getPrecio());
+			System.out.println(tarifa);
 
+			miHabitacion.setTiempo(0);
+			System.out.println("la factura es: " + tarifa + " euros");
+		} else {
+			System.out.println("la habitación no está ocupada");
+		}
+
+	}
 }

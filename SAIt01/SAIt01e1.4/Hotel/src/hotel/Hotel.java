@@ -24,7 +24,7 @@ public class Hotel {
 			habitaciones.add(miSuite);
 		}
 		for (int i = 0; i < Lowcost.getNumeroDePlazas(); i++) {
-			Habitacion miLowcost = new Lowcost("Lowcost", 50, "Ocupada", 0);
+			Habitacion miLowcost = new Lowcost("Lowcost", 50, "ocupada", 0);
 			habitaciones.add(miLowcost);
 
 		}
@@ -39,7 +39,7 @@ public class Hotel {
 			
 			Habitacion eleccion=habitaciones.get(elegido);
 			
-			Habitacion.checkin(eleccion);
+			eleccion.checkin(eleccion);
 			 miEleccion=menu();
 			break;
 		case 2:
@@ -49,7 +49,7 @@ public class Hotel {
 			
 			Habitacion eleccion2=habitaciones.get(elegido2);
 			
-			Habitacion.checkout(eleccion2);
+			eleccion2.checkout(eleccion2);
 			 miEleccion=menu();
 			break;
 		case 3:

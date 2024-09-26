@@ -46,60 +46,20 @@ abstract class Habitacion {
 		this.tiempo = tiempo;
 	}
 
-	public String getClase() {
-		return clase;
-	}
+	 public String getClase() {
+		 return clase;
+	 }
 
 	public void setClase(String clase) {
 		this.clase = clase;
 	}
-	static public void checkin(Habitacion miHabitacion) {
-		System.out.println(miHabitacion);
-		System.out.println(miHabitacion.getClase());
-		System.out.println(miHabitacion.getPrecio());
-		if(miHabitacion.getLibreOcupada().equals("libre")) {
-			miHabitacion.setLibreOcupada("ocupada");
-			Date fecha = new Date(1490161712000L);
-			long dias = fecha.getTime();
-			miHabitacion.setTiempo(dias);
-		    DateFormat simple = new SimpleDateFormat("dd MMM yyyy ");
-			System.out.println(simple.format(fecha.getTime()));
-		}
-		else {
-			System.out.println("la habitacion está ocupada");
-		}
-		
-	}
-	static public void checkout(Habitacion miHabitacion) {
-		System.out.println(miHabitacion);
-		System.out.println(miHabitacion.getPrecio());
-		if(miHabitacion.getLibreOcupada().equals("ocupada")) {
-			long fechaDeRegistro=miHabitacion.getTiempo();
-			
-			miHabitacion.setLibreOcupada("libre");
-			Date fecha = new Date();
-			long dias = fecha.getTime();
-			
-			long tiempoDeEstancia=dias-fechaDeRegistro;
-			
-			int estancia = (int) (tiempoDeEstancia /  (1000*60*60*24));
-			
-			int tarifa=estancia*(miHabitacion.getPrecio());
-			System.out.println(tarifa);
-			
-			miHabitacion.setTiempo(0);
-			System.out.println("la factura es: "+tarifa+" euros");
-		}
-		else {
-			System.out.println("la habitación no está ocupada");
-		}
-		
-	}
+	abstract public void checkin(Habitacion miHabitacion);
+	abstract public void checkout(Habitacion miHabitacion);
 
 
 	@Override
 	public String toString() {
-		return "Habitacion clase:" + clase + ", precio:" + precio + ", libreOcupada:" + libreOcupada + ", tiempo="
+		return "Habitacion clase:" + clase + ", precio:" + precio + ", disponibilida:" + libreOcupada + ", tiempo="
 				+ tiempo + " ";
 	}
 
